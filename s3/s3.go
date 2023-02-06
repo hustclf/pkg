@@ -147,7 +147,7 @@ func NewS3Client(ctx context.Context, opts S3ClientOpts) (S3Client, error) {
 		return nil, errors.WithStack(err)
 	}
 
-	minioOpts := &minio.Options{Creds: credentials, Secure: s3cli.Secure, Region: s3cli.Region}
+	minioOpts := &minio.Options{Creds: credentials, Secure: s3cli.Secure, Region: s3cli.Region, BucketLookup: minio.BucketLookupDNS}
 	minioClient, err = minio.New(s3cli.Endpoint, minioOpts)
 	if err != nil {
 		return nil, errors.WithStack(err)
